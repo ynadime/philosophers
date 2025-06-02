@@ -11,7 +11,7 @@ OBJS = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=thread
 
 LDFLAGS = -lreadline
 

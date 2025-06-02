@@ -11,21 +11,10 @@ void	print_status(t_philo *philo, char *msg)
 
 void	eating(t_philo *philo)
 {	
-	if(philo->id % 2 == 0)
-	{
 	pthread_mutex_lock(philo->left_fork);
 	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
 	print_status(philo, "has taken a fork");
-	}
-	else
-	{
-	ft_sleep(1, philo);
-	pthread_mutex_lock(philo->right_fork);
-	print_status(philo, "has taken a fork");
-	pthread_mutex_lock(philo->left_fork);
-	print_status(philo, "has taken a fork");
-	}
 	print_status(philo, "is eating");
 	pthread_mutex_lock(philo->data_lock);
 	philo->last_meal = get_time();
