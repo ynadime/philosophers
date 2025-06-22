@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ynadime <ynadime@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 14:49:23 by ynadime           #+#    #+#             */
+/*   Updated: 2025/06/03 14:49:46 by ynadime          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
@@ -49,11 +61,11 @@ void					free_memory(void);
 void					*ft_malloc(size_t size);
 void					free_all_resources(t_philo *philo);
 void					start_simulation(t_philo *philo);
-int 					simulation_ended(t_philo *philo);
+int						simulation_ended(t_philo *philo);
 void					*routine(void *arg);
 void					print_status(t_philo *philo, char *msg);
 size_t					get_time(void);
-void	ft_sleep(size_t ms, t_philo *philo);
+void					ft_sleep(size_t ms, t_philo *philo);
 int						ft_isdigit(int c);
 int						ft_atoi(const char *str);
 

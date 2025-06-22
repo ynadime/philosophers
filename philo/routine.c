@@ -1,5 +1,16 @@
-#include "philosophers.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ynadime <ynadime@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 14:49:40 by ynadime           #+#    #+#             */
+/*   Updated: 2025/06/03 14:49:41 by ynadime          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "philosophers.h"
 
 void	print_status(t_philo *philo, char *msg)
 {
@@ -10,7 +21,7 @@ void	print_status(t_philo *philo, char *msg)
 }
 
 void	eating(t_philo *philo)
-{	
+{
 	pthread_mutex_lock(philo->left_fork);
 	print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
@@ -48,13 +59,13 @@ void	*routine(void *arg)
 		return (NULL);
 	}
 	while (!simulation_ended(philo))
-	{	
+	{
 		eating(philo);
-		if(simulation_ended(philo))
-		break;
+		if (simulation_ended(philo))
+			break ;
 		sleeping(philo);
-		if(simulation_ended(philo))
-		break;
+		if (simulation_ended(philo))
+			break ;
 		thinking(philo);
 	}
 	return (NULL);

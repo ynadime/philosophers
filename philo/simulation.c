@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ynadime <ynadime@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 14:49:38 by ynadime           #+#    #+#             */
+/*   Updated: 2025/06/04 10:26:29 by ynadime          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-int simulation_ended(t_philo *philo)
+int	simulation_ended(t_philo *philo)
 {
-	int status;
+	int	status;
 
 	pthread_mutex_lock(philo->data_lock);
 	status = philo->data->end_simulation;
 	pthread_mutex_unlock(philo->data_lock);
-	return status;
+	return (status);
 }
 
 int	check_death(t_philo *philo)
@@ -23,7 +35,8 @@ int	check_death(t_philo *philo)
 			philo->data->end_simulation = 1;
 			pthread_mutex_unlock(philo->data_lock);
 			pthread_mutex_lock(philo->write_lock);
-			printf("%zu %d died\n", get_time() - philo->data->begin, philo[i].id);
+			printf("%zu %d died\n", get_time() - philo->data->begin,
+				philo[i].id);
 			pthread_mutex_unlock(philo->write_lock);
 			return (1);
 		}
@@ -41,7 +54,7 @@ int	check_meals(t_philo *philo)
 		return (0);
 	i = 0;
 	while (i < philo->data->num_of_philo)
-	{	
+	{
 		pthread_mutex_lock(philo->data_lock);
 		if (philo[i].meals_eaten < philo->data->must_eat)
 		{
@@ -69,7 +82,7 @@ void	start_simulation(t_philo *philo)
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
 			return ;
 		i++;
-			usleep(100);
+		usleep(100);
 	}
 	while (1)
 	{
@@ -78,7 +91,6 @@ void	start_simulation(t_philo *philo)
 		usleep(1000);
 	}
 	i = 0;
-	usleep(1000);
 	while (i < philo->data->num_of_philo)
 		pthread_join(philo[i++].thread, NULL);
 	free_all_resources(philo);
